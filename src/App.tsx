@@ -1,5 +1,9 @@
+import { RouterProvider } from 'react-router-dom';
+
+import { router } from './routes/router.tsx';
+
 function App() {
-  return <h1>Hamkke Study</h1>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
