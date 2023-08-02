@@ -1,27 +1,62 @@
-# React + TypeScript + Vite
+# Hamkke Study Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+같이 공부하기위한 스터디원 또는 프로젝트 팀원을 모집하고 참여할 수 있도록 게시판 서비스를 제공합니다.
 
-Currently, two official plugins are available:
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Contact Me
 
-## Expanding the ESLint configuration
+jy522hi@gmail.com
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<br/>
 
-- Configure the top-level `parserOptions` property like this:
+## Deploy
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- Client: #URL
+- ApiDoc: #URL
+
+<br/>
+
+## Start
+
+사전에 설치 및 환경변수 설정이 필요합니다. `.env.example` 파일을 참고하여 `.env.development` 파일을 생성하여 실행해주세요.
+
+궁금한 정보가 있다면 상단에 있는 이메일로 연락을 부탁드립니다.
+
+```
+npm i
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<br/>
+
+## Function
+
+### 회원 기능
+
+- 회원가입
+- 로그인
+- 소셜 로그인 (구글)
+- 마이 페이지 기능
+
+### 게시글 기능
+
+- 정렬 
+- 검색
+
+
+<br/>
+
+## API Document with google sheets
+
+- url: 
+
+<br/>
+
+## Table Document
+
+<br/>
+
+## ER-Diagram
+
+![er-diagram](https://github.com/chipmunk-and-acorns/hamkke-study-client/assets/62678492/efedaa41-f633-41d3-8896-c6f57fa17d8e)
