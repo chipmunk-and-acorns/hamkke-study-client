@@ -1,8 +1,7 @@
 const Main = () => {
   return (
     <div>
-      Main Page
-      <h1>Hamkke Study</h1>
+      <h1>Hellow Hamkke Study :)</h1>
     </div>
   );
 };
