@@ -1,6 +1,6 @@
 ---
 name: "[Task] 만들 기능"
-about: 클라이언트
+about: 만들 기능 이슈 생성
 title: "[Task] 만들 기능"
 labels: client
 assignees: jiye-7
