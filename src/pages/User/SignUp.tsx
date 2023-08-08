@@ -1,3 +1,5 @@
+import { Container, Box, useTheme } from '@mui/material';
+
 /**
  * 일반 회원가입
  * - [ ] email
@@ -16,7 +18,13 @@
  */
 
 const SignUp = () => {
-  return <div>SignUp</div>;
+  const theme = useTheme();
+
+  return (
+    <Container typeof="div" maxWidth="sm" sx={{ bgcolor: theme.palette.primary.dark }}>
+      SignUp
+    </Container>
+  );
 };
 
 export default SignUp;
