@@ -1,5 +1,3 @@
-import { ComponentsOverrides } from '@mui/material';
-
 export interface CustomPalette {
   primary: {
     main: string;
