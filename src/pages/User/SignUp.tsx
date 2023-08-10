@@ -1,4 +1,5 @@
 import { Container, Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import CustomInput from '../../components/CustomInput';
 import { useTheme } from '@mui/material';
@@ -26,29 +27,30 @@ const SignUp = () => {
   const ContainerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '7rem',
-    paddingY: '4rem',
-    backgroundColor: theme.customPalette.grey[50],
+    mt: '7rem',
+    py: '4rem',
+    bgcolor: theme.customPalette.grey[50],
     border: `1px solid ${theme.customPalette.grey[100]}`,
     borderRadius: '0.5rem',
+    boxShadow: 3,
 
     '& > div': {
-      paddingX: '5rem',
+      px: '5rem',
       '> div': {
-        paddingBottom: '1.3rem',
+        pb: '1.3rem',
       },
     },
 
     'button:nth-child(1)': {
-      marginTop: '3rem',
+      mt: '1rem',
       width: '100%',
     },
   };
 
   return (
     <Container typeof="div" maxWidth="sm" sx={ContainerStyle}>
-      <Typography variant="h4" component="h4" sx={{ paddingBottom: '3rem', textAlign: 'center' }}>
-        SignUp
+      <Typography variant="h4" component="h4" sx={{ pb: '3rem', textAlign: 'center' }}>
+        회원가입
       </Typography>
       <Box>
         <CustomInput content="이메일" htmlFor="email" value="" inputId="email" />
@@ -71,7 +73,9 @@ const SignUp = () => {
         <Typography component="span" variant="h6" sx={{ fontSize: '0.9rem' }}>
           이미 회원이신가요?
         </Typography>
-        <Button>로그인하기</Button>
+        <Button>
+          <Link to="/login">로그인하기 </Link>
+        </Button>
       </Box>
       <Box>
         <Button variant="contained">회원가입</Button>
