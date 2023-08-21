@@ -1,7 +1,7 @@
 import { useField } from 'formik';
 import { Box, InputLabel, OutlinedInput, Typography } from '@mui/material';
 
-import theme from '../styles/theme';
+import theme from '../../styles/theme';
 
 interface IProps {
   label: string;
@@ -19,7 +19,7 @@ const TextInput = ({ label, ...props }: IProps) => {
         <OutlinedInput {...filed} {...props} id={props.name} />
       </Box>
       <Box sx={ErrorBoxStyle}>
-        {meta.touched && meta.error && <Typography variant="caption">{meta.error}</Typography>}
+        {meta.touched && meta.error && <Typography variant="caption">* {meta.error}</Typography>}
       </Box>
     </>
   );
@@ -27,11 +27,16 @@ const TextInput = ({ label, ...props }: IProps) => {
 
 const InputBoxStyle = {
   label: {
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: 'bold',
+    mb: '0.3rem',
+    ':hover': {
+      cursor: 'pointer',
+    },
   },
   div: {
     width: '100%',
+    height: '2.7rem',
   },
 };
 
