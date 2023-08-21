@@ -76,7 +76,7 @@ const ModalStyle = {
   borderRadius: '1rem',
   pt: '1rem',
 
-  '& > button:first-child': {
+  '& > button:first-of-type': {
     border: 'none',
     backgroundColor: 'inherit',
     position: 'fixed',
@@ -101,7 +101,7 @@ const ImagePreviewAcceptStyle = {
     width: '100px',
   },
 
-  'div:first-child': {
+  'div:first-of-type': {
     width: '100px',
     height: '100px',
     marginTop: '2rem',
