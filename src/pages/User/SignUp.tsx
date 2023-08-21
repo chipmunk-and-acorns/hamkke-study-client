@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import { Container, Box, Typography, Button } from '@mui/material';
 
-import TextInput from '../../components/TextInput';
-import theme from '../../styles/theme';
-import { validation } from '../../utils/validation';
+import TextInput from '../../components/Input/TextInput';
+import ProfileImgPreview from '../../components/imageUpload/ProfileImgPreview';
+import { validateSchema } from '../../utils/validation';
 import { User } from '../../types/user';
+import { images } from '../../utils/importImageUrl';
 
 /**
  * 일반 회원가입
@@ -22,7 +22,7 @@ import { User } from '../../types/user';
  *
  * 회원 가입 성공 후 로직
  * - 로그인 처리한 후 페이지 이동
- *  - 이전 페이지로 이동 (없다면 메인 페이지로 라우팅)
+ *  - 이전 페이지로 이동 (없다면 메인 페이지로 라우팅)e
  */
 
 const SignUp = () => {
@@ -32,38 +32,18 @@ const SignUp = () => {
     passwordConfirm: '',
     nickname: '',
   };
-
-  const validateSchema = Yup.object({
-    username: Yup.string()
-      .matches(validation.emailValidRule, '올바른 이메일 형식을 맞춰 입력해주세요.')
-      .required('이메일을 입력해주세요.'),
-    password: Yup.string()
-      .matches(
-        validation.passwordValidRule,
-        '영문자, 숫자, 특수문자(!@#$%^&*) 각 1개 이상, 8자~16자로 입력해주세요.'
-      )
-      .required('비밀번호를 입력해주세요.'),
-    passwordConfirm: Yup.string()
-      .equals([Yup.ref('password')], '비밀번호가 일치하지 않습니다.')
-      .required('비밀번호 확인을 위해 필수로 입력해주셔야됩니다.'),
-    nickname: Yup.string()
-      .matches(
-        validation.nicknameValidRule,
-        '영문자, 숫자, 한글로 2자 이상 10자 이하로 입력가능합니다.'
-      )
-      .required('닉네임을 입력해주세요.'),
-  });
+  // 프로필 사진
 
   const handleSubmit = (values: User) => {
     console.log('회원 가입', values);
   };
 
   return (
-    <Container typeof="div" maxWidth="sm" sx={ContainerStyle}>
-      <Typography variant="h4" component="h4" sx={{ pb: '3rem', textAlign: 'center' }}>
-        회원가입
-      </Typography>
-      <Box>
+    <Container typeof="div" sx={ContainerStyle}>
+      <Link to="/">
+        <img src={images.logo} alt="go to hamkke study home" title="홈으로 이동하기" />
+      </Link>
+      <Box sx={ContentBoxStyle}>
         <Formik
           initialValues={initialValues}
           validationSchema={validateSchema}
@@ -74,6 +54,7 @@ const SignUp = () => {
             <TextInput label="비밀번호" name="password" type="password" />
             <TextInput label="비밀번호 확인" name="passwordConfirm" type="password" />
             <TextInput label="닉네임" name="nickname" type="string" />
+            <ProfileImgPreview />
             <Box sx={LoginBoxStyle}>
               <Typography component="span" variant="h6">
                 이미 회원이신가요?
@@ -97,19 +78,16 @@ const SignUp = () => {
 const ContainerStyle = {
   display: 'flex',
   flexDirection: 'column',
-  mt: '7rem',
-  py: '3rem',
-  bgcolor: theme.customPalette.grey[50],
-  border: `1px solid ${theme.customPalette.grey[100]}`,
-  borderRadius: '0.5rem',
-  boxShadow: 3,
-  '& > div': {
-    width: '100%',
-    px: '5rem',
-    '> form > div': {
-      pb: '0.5rem',
-    },
+  width: '500px',
+  pt: '2rem',
+
+  'a > img': {
+    mb: '3rem',
   },
+};
+
+const ContentBoxStyle = {
+  width: '100%',
 };
 
 const LoginBoxStyle = {
@@ -124,6 +102,8 @@ const LoginBoxStyle = {
 const SignUpBtnStyle = {
   width: '100%',
   mt: '1rem',
+  fontSize: '1rem',
+  fontWeight: 'bold',
 };
 
 export default SignUp;
