@@ -26,12 +26,13 @@ const ImageSelectionModal = ({
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const cropperObj = cropperRef.current.cropper;
 
-      setCropData(cropperObj.getCroppedCanvas().toDataURL());
-
       cropperObj.getCroppedCanvas().toBlob((blob) => {
         if (blob) {
           const file = new File([blob], 'croppedImage');
-          handleUpdateImageFile(file);
+          if (file) {
+            setCropData(cropperObj.getCroppedCanvas().toDataURL());
+            handleUpdateImageFile(file);
+          }
         }
       });
     }

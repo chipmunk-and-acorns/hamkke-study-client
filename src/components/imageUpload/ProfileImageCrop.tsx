@@ -26,15 +26,19 @@ const ProfileImageCrop = ({
     const files = e.target.files;
     const reader = new FileReader();
 
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        setImageSrc(reader.result);
-      }
-    };
+    if (files && files[0].size > 1024 * 1024 * 2) {
+      alert('파일 용량이 너무 큽니다. 파일은 2MB 이하만 가능합니다.');
+    } else {
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          setImageSrc(reader.result);
+        }
+      };
 
-    if (files) {
-      reader.readAsDataURL(files[0]);
-      handleUpdateImageFile(files[0]);
+      if (files) {
+        reader.readAsDataURL(files[0]);
+        handleUpdateImageFile(files[0]);
+      }
     }
   };
 
