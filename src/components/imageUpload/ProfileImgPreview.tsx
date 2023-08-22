@@ -5,12 +5,16 @@ import { images } from '../../utils/importImageUrl';
 import ImageSelectionModal from './ImageSelectionModal';
 import theme from '../../styles/theme';
 
-const ProfileImgPreview = () => {
+interface IProps {
+  handleUpdateImageFile: (selectedImg: File | null) => void;
+}
+
+const ProfileImgPreview = ({ handleUpdateImageFile }: IProps) => {
   // 프로필 선택 버튼 클릭 시 프로필 선택하고 사이즈 조절할 수 있는 모달창이 열리는 조건의 상태값
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   //  파일 선택 후 사이즈 조절 -> 확인 버튼 클릭시 기본 이미지를 선택한 이미지로 변경
-  const [selectImage, setSelectImage] = useState<string>('');
+  const [selectImage, setSelectImage] = useState<string | null>(null);
 
   // 모달창 열림 여부를 변경하는 함수
   const handleModalControl = () => {
@@ -18,8 +22,13 @@ const ProfileImgPreview = () => {
   };
 
   // 모달 창 닫히면서 선택한 이미지의 정보를 저장해야 됨
-  const handleSelectImageUpdate = (imgUrl: string) => {
+  const handleUpdateImageUrl = (imgUrl: string) => {
     setSelectImage(imgUrl);
+  };
+
+  const handleUpdateDefaultImage = () => {
+    setSelectImage(null);
+    handleUpdateImageFile(null);
   };
 
   return (
@@ -35,18 +44,20 @@ const ProfileImgPreview = () => {
           />
         </Box>
         <Box>
-          <Button variant="outlined" size="small" onClick={handleModalControl}>
+          <Button variant="outlined" size="medium" onClick={handleModalControl}>
             프로필 이미지 선택
           </Button>
-          <Button variant="outlined" size="small" onClick={() => setSelectImage('')}>
+          <Button variant="outlined" size="medium" onClick={handleUpdateDefaultImage}>
             기본 이미지 사용
           </Button>
         </Box>
         {isModalOpen && (
           <Box>
             <ImageSelectionModal
+              selectImage={selectImage}
               handleCloseModal={handleModalControl}
-              handleSelectImageUpdate={handleSelectImageUpdate}
+              handleUpdateImageUrl={handleUpdateImageUrl}
+              handleUpdateImageFile={handleUpdateImageFile}
             />
           </Box>
         )}
@@ -81,7 +92,7 @@ const BoxStyle = {
   div: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
   },
 };
 

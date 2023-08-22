@@ -7,12 +7,19 @@ import { images } from '../../utils/importImageUrl';
 import theme from '../../styles/theme';
 
 interface IProps {
+  selectImage: string | null;
   cropperRef: RefObject<ReactCropperElement>;
   getCropData: () => void;
+  handleUpdateImageFile: (selectedImg: File | null) => void;
 }
 
-const ProfileImageCrop = ({ cropperRef, getCropData }: IProps) => {
-  const [imageSrc, setImageSrc] = useState<string>(images.profileImage1);
+const ProfileImageCrop = ({
+  selectImage,
+  cropperRef,
+  getCropData,
+  handleUpdateImageFile,
+}: IProps) => {
+  const [imageSrc, setImageSrc] = useState<string>(selectImage ?? images.profileImage1);
 
   const handleOtherFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -27,6 +34,7 @@ const ProfileImageCrop = ({ cropperRef, getCropData }: IProps) => {
 
     if (files) {
       reader.readAsDataURL(files[0]);
+      handleUpdateImageFile(files[0]);
     }
   };
 
@@ -62,6 +70,7 @@ const ProfileImageCrop = ({ cropperRef, getCropData }: IProps) => {
           autoCropArea={1}
           checkOrientation={false}
           guides={true}
+          ready={getCropData}
           cropend={getCropData}
         />
       </Box>

@@ -7,24 +7,40 @@ import ProfileImageCrop from './ProfileImageCrop';
 import { images } from '../../utils/importImageUrl';
 
 interface IProps {
+  selectImage: string | null;
   handleCloseModal: () => void;
-  handleSelectImageUpdate: (cropData: string) => void;
+  handleUpdateImageUrl: (cropData: string) => void;
+  handleUpdateImageFile: (selectedImg: File | null) => void;
 }
 
-const ImageSelectionModal = ({ handleCloseModal, handleSelectImageUpdate }: IProps) => {
+const ImageSelectionModal = ({
+  selectImage,
+  handleCloseModal,
+  handleUpdateImageUrl,
+  handleUpdateImageFile,
+}: IProps) => {
   const [cropData, setCropData] = useState('');
   const cropperRef = createRef<ReactCropperElement>();
 
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
-      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      const cropperObj = cropperRef.current.cropper;
+
+      setCropData(cropperObj.getCroppedCanvas().toDataURL());
+
+      cropperObj.getCroppedCanvas().toBlob((blob) => {
+        if (blob) {
+          const file = new File([blob], 'croppedImage');
+          handleUpdateImageFile(file);
+        }
+      });
     }
   };
 
   const handleSetCropData = () => {
     getCropData();
+    handleUpdateImageUrl(cropData);
     handleCloseModal();
-    handleSelectImageUpdate(cropData);
   };
 
   return (
@@ -34,7 +50,12 @@ const ImageSelectionModal = ({ handleCloseModal, handleSelectImageUpdate }: IPro
         <Button variant="text" onClick={handleCloseModal}>
           X
         </Button>
-        <ProfileImageCrop cropperRef={cropperRef} getCropData={getCropData} />
+        <ProfileImageCrop
+          selectImage={selectImage}
+          cropperRef={cropperRef}
+          getCropData={getCropData}
+          handleUpdateImageFile={handleUpdateImageFile}
+        />
         <Box sx={ImagePreviewAcceptStyle}>
           <Box>
             <Typography variant="subtitle2" component="p">
@@ -69,7 +90,7 @@ const ModalBackgroundStyle = {
 const ModalStyle = {
   position: 'absolute',
   zIndex: '10',
-  transform: 'translate(-50%, -27%)',
+  transform: 'translate(-50%, -70%)',
   width: '500px',
   backgroundColor: theme.customPalette.grey[50],
   boxShadow: 10,
@@ -108,10 +129,7 @@ const ImagePreviewAcceptStyle = {
   },
   'div:last-child': {
     width: '60%',
-    mt: '1rem',
-    /* position: 'absolute',
-    bottom: '1.5rem',
-    right: 0, */
+    mt: '2rem',
   },
 };
 

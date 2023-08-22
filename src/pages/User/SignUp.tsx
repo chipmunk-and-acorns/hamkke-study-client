@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { Container, Box, Typography, Button } from '@mui/material';
@@ -32,10 +33,23 @@ const SignUp = () => {
     passwordConfirm: '',
     nickname: '',
   };
-  // 프로필 사진
+  const [profileImageFile, setProfileImageFile] = useState<File | null>();
 
+  const handleUpdateImageFile = (file: File | null) => {
+    setProfileImageFile(file);
+    console.log(file);
+  };
+
+  /**
+   * 1. 서버에 s3에 이미지 업로드할 수 있는 URL 요청
+   * 2. 응답받은 url로 이미지 저장 요청
+   * 3. s3 업로드 후 받은 url을 data 객체에 추가(profileImage)
+   */
   const handleSubmit = (values: User) => {
-    console.log('회원 가입', values);
+    const data = { ...values };
+    delete data.passwordConfirm;
+    console.log(data);
+    console.log(profileImageFile);
   };
 
   return (
@@ -54,7 +68,7 @@ const SignUp = () => {
             <TextInput label="비밀번호" name="password" type="password" />
             <TextInput label="비밀번호 확인" name="passwordConfirm" type="password" />
             <TextInput label="닉네임" name="nickname" type="string" />
-            <ProfileImgPreview />
+            <ProfileImgPreview handleUpdateImageFile={handleUpdateImageFile} />
             <Box sx={LoginBoxStyle}>
               <Typography component="span" variant="h6">
                 이미 회원이신가요?
