@@ -37,19 +37,16 @@ const SignUp = () => {
 
   const handleUpdateImageFile = (file: File | null) => {
     setProfileImageFile(file);
-    console.log(file);
   };
 
   /**
    * 1. 서버에 s3에 이미지 업로드할 수 있는 URL 요청
-   * 2. 응답받은 url로 이미지 저장 요청
+   * 2. 응답받은 url로 이미지 저장 요청 - profileImageFile 파일 객체 저장
    * 3. s3 업로드 후 받은 url을 data 객체에 추가(profileImage)
    */
   const handleSubmit = (values: User) => {
     const data = { ...values };
     delete data.passwordConfirm;
-    console.log(data);
-    console.log(profileImageFile);
   };
 
   return (
