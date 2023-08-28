@@ -1,4 +1,4 @@
-import { useState, createRef, useEffect } from 'react';
+import { useState, createRef } from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { ReactCropperElement } from 'react-cropper';
 
@@ -50,8 +50,6 @@ const ImageSelectionModal = ({
     handleUpdateImageUrl(cropData);
     handleCloseModal();
   };
-
-  useEffect(() => {}, [cropperRef, getCropData]);
 
   return (
     <>

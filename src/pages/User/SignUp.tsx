@@ -63,9 +63,6 @@ const SignUp = () => {
           formData.append(key, filed[key as keyof typeof filed]);
         }
         formData.append('file', profileImageFile);
-        /* for (const pair of formData.entries()) {
-          console.log(pair);
-        } */
         s3UploadedImageUrl = await postS3ImageUpload(presignedData.presigned.url, formData);
       }
 

@@ -5,16 +5,10 @@ import { typeGuard } from '../utils/typeGuard';
 export interface IPresignedImgUrl {
   key: string;
   presigned: {
-    fields: {
-      bucket: string;
-      key: string;
-      Policy: string;
-      'X-Amz-Algorithm': string;
-      'X-Amz-Credential': string;
-      'X-Amz-Date': string;
-      'X-Amz-Signature': string;
-    };
     url: string;
+    fields: {
+      [key: string]: string;
+    };
   };
 }
 
