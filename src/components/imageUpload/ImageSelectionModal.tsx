@@ -1,4 +1,4 @@
-import { useState, createRef } from 'react';
+import { useState, createRef, useEffect } from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { ReactCropperElement } from 'react-cropper';
 
@@ -7,6 +7,7 @@ import ProfileImageCrop from './ProfileImageCrop';
 import { images } from '../../utils/importImageUrl';
 
 interface IProps {
+  profileImageFile: File | null;
   selectImage: string | null;
   handleCloseModal: () => void;
   handleUpdateImageUrl: (cropData: string) => void;
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 const ImageSelectionModal = ({
+  profileImageFile,
   selectImage,
   handleCloseModal,
   handleUpdateImageUrl,
@@ -27,12 +29,17 @@ const ImageSelectionModal = ({
       const cropperObj = cropperRef.current.cropper;
 
       cropperObj.getCroppedCanvas().toBlob((blob) => {
-        if (blob) {
-          const file = new File([blob], 'croppedImage');
-          if (file) {
-            setCropData(cropperObj.getCroppedCanvas().toDataURL());
-            handleUpdateImageFile(file);
-          }
+        if (blob && profileImageFile !== null) {
+          const { name, type } = profileImageFile;
+          const newCropFile = new File([blob], name, { type });
+
+          setCropData(cropperObj.getCroppedCanvas().toDataURL());
+          handleUpdateImageFile(newCropFile);
+        } else if (blob) {
+          const defaultCropFile = new File([blob], 'default image', { type: 'image/jpeg' });
+
+          setCropData(cropperObj.getCroppedCanvas().toDataURL());
+          handleUpdateImageFile(defaultCropFile);
         }
       });
     }
@@ -43,6 +50,8 @@ const ImageSelectionModal = ({
     handleUpdateImageUrl(cropData);
     handleCloseModal();
   };
+
+  useEffect(() => {}, [cropperRef, getCropData]);
 
   return (
     <>

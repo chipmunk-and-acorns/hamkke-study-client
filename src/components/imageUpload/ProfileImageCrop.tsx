@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useState } from 'react';
+import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { Box, InputLabel, Typography } from '@mui/material';
 import Cropper, { ReactCropperElement } from 'react-cropper';
 
@@ -23,7 +23,11 @@ const ProfileImageCrop = ({
 
   const handleOtherFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+
     const files = e.target.files;
+
+    if (!files) return;
+
     const reader = new FileReader();
 
     if (files && files[0].size > 1024 * 1024 * 2) {
@@ -34,11 +38,8 @@ const ProfileImageCrop = ({
           setImageSrc(reader.result);
         }
       };
-
-      if (files) {
-        reader.readAsDataURL(files[0]);
-        handleUpdateImageFile(files[0]);
-      }
+      reader.readAsDataURL(files[0]);
+      handleUpdateImageFile(files[0]);
     }
   };
 
@@ -51,7 +52,7 @@ const ProfileImageCrop = ({
         <input
           id="profileImg"
           type="file"
-          accept="image/png, image/jpeg, image/jpg"
+          accept="image/jpeg,image/png,image/jpg"
           onChange={handleOtherFileSelect}
         />
         <Typography variant="subtitle2" component="p">
@@ -61,11 +62,12 @@ const ProfileImageCrop = ({
       <Box sx={{ width: '100%' }}>
         <Cropper
           ref={cropperRef}
+          src={imageSrc}
+          key={imageSrc}
           style={{ height: 300, width: '100%' }}
           zoomTo={0.2}
           initialAspectRatio={1}
           preview=".img-preview"
-          src={imageSrc}
           viewMode={1}
           minCropBoxHeight={10}
           minCropBoxWidth={10}

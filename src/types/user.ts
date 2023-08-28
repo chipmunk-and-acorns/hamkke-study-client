@@ -3,4 +3,5 @@ export interface User {
   password: string;
   passwordConfirm?: string;
   nickname: string;
+  profileImage?: string;
 }

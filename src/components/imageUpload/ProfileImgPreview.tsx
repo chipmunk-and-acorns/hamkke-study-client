@@ -6,10 +6,11 @@ import ImageSelectionModal from './ImageSelectionModal';
 import theme from '../../styles/theme';
 
 interface IProps {
+  profileImageFile: File | null;
   handleUpdateImageFile: (selectedImg: File | null) => void;
 }
 
-const ProfileImgPreview = ({ handleUpdateImageFile }: IProps) => {
+const ProfileImgPreview = ({ profileImageFile, handleUpdateImageFile }: IProps) => {
   // 프로필 선택 버튼 클릭 시 프로필 선택하고 사이즈 조절할 수 있는 모달창이 열리는 조건의 상태값
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -54,6 +55,7 @@ const ProfileImgPreview = ({ handleUpdateImageFile }: IProps) => {
         {isModalOpen && (
           <Box>
             <ImageSelectionModal
+              profileImageFile={profileImageFile}
               selectImage={selectImage}
               handleCloseModal={handleModalControl}
               handleUpdateImageUrl={handleUpdateImageUrl}
