@@ -1,12 +1,16 @@
+import { Box } from '@mui/material';
+
 import LeftMenu from './LeftMenu';
 import RightMenu from './RightMenu';
 
 const GlobalNavigationBar = () => {
   return (
-    <nav style={ContainerStyle}>
-      <LeftMenu />
-      <RightMenu />
-    </nav>
+    <Box sx={ContainerStyle}>
+      <nav>
+        <LeftMenu />
+        <RightMenu />
+      </nav>
+    </Box>
   );
 };
 
@@ -15,9 +19,11 @@ const ContainerStyle = {
   py: '1rem',
   px: '4rem',
 
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 };
 
 export default GlobalNavigationBar;
