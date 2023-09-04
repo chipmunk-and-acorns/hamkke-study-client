@@ -7,7 +7,7 @@ import { images } from '../../utils/importImageUrl';
 import DropdownMenu from './DropdownMenu';
 
 const RightMenu = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [isModalMenuOpen, setIsModalMenuOpen] = useState(false);
 
   const renderMenu = () => {
