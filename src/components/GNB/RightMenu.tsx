@@ -4,19 +4,17 @@ import { Box, List, ListItem, ListItemIcon, ListItemText, Avatar } from '@mui/ma
 import { CreateRounded, LoginRounded } from '@mui/icons-material';
 
 import { images } from '../../utils/importImageUrl';
+import DropdownMenu from './DropdownMenu';
 
 const RightMenu = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+  const [isModalMenuOpen, setIsModalMenuOpen] = useState(false);
 
-  // 로그인 전: 새 글 쓰기/로그인
-  // 로그인 후: 새 글 쓰기/알림/프로필 사진(드롭다운 메뉴)
   const renderMenu = () => {
     if (isLogin) {
       return (
-        <ListItem>
-          <Link to="/">
-            <Avatar src={images.profileImage1} alt="user profile image" />
-          </Link>
+        <ListItem onClick={handleModalMenuControl}>
+          <Avatar src={images.profileImage1} alt="user profile image" />
         </ListItem>
       );
     } else {
@@ -33,6 +31,10 @@ const RightMenu = () => {
     }
   };
 
+  const handleModalMenuControl = () => {
+    setIsModalMenuOpen((prev) => !prev);
+  };
+
   return (
     <Box sx={ContainerStyle}>
       <List>
@@ -46,6 +48,7 @@ const RightMenu = () => {
         </ListItem>
         {renderMenu()}
       </List>
+      {isModalMenuOpen && <DropdownMenu handleModalMenuControl={handleModalMenuControl} />}
     </Box>
   );
 };
@@ -57,14 +60,18 @@ const ContainerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
   },
+
   'li a': {
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
   },
-
   'li div:first-child': {
     minWidth: '2rem',
+  },
+
+  img: {
+    cursor: 'pointer',
   },
 };
 
