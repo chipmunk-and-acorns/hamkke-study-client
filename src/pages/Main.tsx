@@ -1,5 +1,11 @@
+import Footer from '../components/Footer/Footer';
+
 const Main = () => {
-  return <div>{/* <h1>Hellow Hamkke Study :)</h1> */}</div>;
+  return (
+    <div>
+      <Footer />
+    </div>
+  );
 };
 
 export default Main;
