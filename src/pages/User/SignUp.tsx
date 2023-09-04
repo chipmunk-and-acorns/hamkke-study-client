@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import { Container, Box, Typography, Button } from '@mui/material';
 
 import TextInput from '../../components/Input/TextInput';
-import ProfileImgPreview from '../../components/imageUpload/ProfileImgPreview';
+import ProfileImgPreview from '../../components/ImageUpload/ProfileImgPreview';
 import { validateSchema } from '../../utils/validation';
 import { User } from '../../types/user';
 import { images } from '../../utils/importImageUrl';
