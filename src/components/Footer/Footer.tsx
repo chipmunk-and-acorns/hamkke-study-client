@@ -4,6 +4,7 @@ import { Container, Box, Typography, List, ListItem, ListItemText } from '@mui/m
 import { images } from '../../utils/importImageUrl';
 import theme from '../../styles/theme';
 import TermsOfUseModal from '../../pages/TermsOfUse';
+import PrivacyPolicy from '../../pages/PrivacyPolicy';
 
 type TermsState = {
   [key: string]: boolean;
@@ -47,6 +48,9 @@ const Footer = () => {
       </Container>
       {terms.termsOfUse && (
         <TermsOfUseModal handleClick={() => setTerms({ ...terms, termsOfUse: false })} />
+      )}
+      {terms.privacyPolicy && (
+        <PrivacyPolicy handleClick={() => setTerms({ ...terms, privacyPolicy: false })} />
       )}
     </>
   );
