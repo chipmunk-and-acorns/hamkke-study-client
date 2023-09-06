@@ -94,6 +94,7 @@ const RightBoxStyle = {
     li: {
       textAlign: 'center',
       span: {
+        width: '130px',
         color: theme.palette.grey[800],
         fontWeight: 'bold',
         cursor: 'pointer',

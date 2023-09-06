@@ -6,7 +6,7 @@ import { Container, Box, Typography, Button } from '@mui/material';
 
 import TextInput from '../../components/Input/TextInput';
 import ProfileImgPreview from '../../components/ImageUpload/ProfileImgPreview';
-import { validateSchema } from '../../utils/validation';
+import { registerValidateSchema } from '../../utils/validation';
 import { User } from '../../types/user';
 import { images } from '../../utils/importImageUrl';
 import { getPresignedImageUploadUrl, postS3ImageUpload } from '../../api/imageUploadApi';
@@ -96,7 +96,7 @@ const SignUp = () => {
       <Box sx={ContentBoxStyle}>
         <Formik
           initialValues={initialValues}
-          validationSchema={validateSchema}
+          validationSchema={registerValidateSchema}
           onSubmit={handleSubmit}
         >
           <Form>
@@ -132,7 +132,7 @@ const ContainerStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '500px',
-  pt: '2rem',
+  pt: '3rem',
 
   'a > img': {
     mb: '3rem',
