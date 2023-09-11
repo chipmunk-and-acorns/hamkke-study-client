@@ -1,21 +1,39 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, Button } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
+import { useSetRecoilState } from 'recoil';
 
-import TextInput from '../../components/Input/TextInput';
 import { images } from '../../utils/importImageUrl';
 import { loginValidateSchema } from '../../utils/validation';
 import { User } from '../../types/user';
 import theme from '../../styles/theme';
+import { postLogin } from '../../api/userApi';
+import { userState } from '../../recoil/userState';
+import TextInput from '../../components/Input/TextInput';
+import { PathName } from '../../types/routerPath';
 
 const SignIn = () => {
+  const setUserInfo = useSetRecoilState(userState);
+
   const initialValues = {
     username: '',
     password: '',
   };
 
-  const handleSubmit = (values: User) => {
-    console.log(values);
+  const mutation = useMutation(postLogin);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values: User) => {
+    try {
+      const response = await mutation.mutateAsync(values);
+      if (response) {
+        setUserInfo(response);
+        navigate(PathName.Home);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSocialLogin = () => {
@@ -24,7 +42,7 @@ const SignIn = () => {
 
   return (
     <Container typeof="div" sx={ContainerStyle}>
-      <Link to="/">
+      <Link to={PathName.Home}>
         <img src={images.logo} alt="go to hamkke study home" title="홈으로 이동하기" />
       </Link>
       <Box sx={ContentBoxStyle}>
@@ -41,7 +59,7 @@ const SignIn = () => {
                 아직 회원이 아니신가요?
               </Typography>
               <Button>
-                <Link to="/register">회원가입하기</Link>
+                <Link to={PathName.Register}>회원가입하기</Link>
               </Button>
             </Box>
             <Box>

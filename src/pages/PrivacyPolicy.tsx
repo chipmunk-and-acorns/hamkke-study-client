@@ -184,6 +184,7 @@ const ContainerStyle = {
     mr: '0.5rem',
     border: 'none',
     cursor: 'pointer',
+    fontSize: '1.2rem',
   },
 
   h2: {

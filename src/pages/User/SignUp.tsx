@@ -12,6 +12,7 @@ import { images } from '../../utils/importImageUrl';
 import { getPresignedImageUploadUrl, postS3ImageUpload } from '../../api/imageUploadApi';
 import { postRegister } from '../../api/userApi';
 import { typeGuard } from '../../utils/typeGuard';
+import { PathName } from '../../types/routerPath';
 
 /**
  * 일반 회원가입
@@ -71,13 +72,13 @@ const SignUp = () => {
         data.profileImage = `${presignedData.presigned.url}${presignedData.key}`;
         const response = await mutation.mutateAsync(data);
 
-        if (response) navigate('/');
+        if (response) navigate(PathName.Home);
       }
     } else {
       // 이미지가 없을 때
       try {
         const response = await mutation.mutateAsync(data);
-        if (response) navigate('/');
+        if (response) navigate(PathName.Home);
       } catch (error: unknown) {
         if (typeGuard<{ response: { data: { message: string } } }>(error, 'response')) {
           alert(error.response.data.message);
@@ -113,7 +114,7 @@ const SignUp = () => {
                 이미 회원이신가요?
               </Typography>
               <Button>
-                <Link to="/login">로그인하기</Link>
+                <Link to={PathName.Login}>로그인하기</Link>
               </Button>
             </Box>
             <Box>

@@ -5,9 +5,10 @@ import { CreateRounded, LoginRounded } from '@mui/icons-material';
 
 import { images } from '../../utils/importImageUrl';
 import DropdownMenu from './DropdownMenu';
+import { PathName } from '../../types/routerPath';
 
 const RightMenu = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = localStorage.getItem('accessToken');
   const [isModalMenuOpen, setIsModalMenuOpen] = useState(false);
 
   const renderMenu = () => {
@@ -20,7 +21,7 @@ const RightMenu = () => {
     } else {
       return (
         <ListItem>
-          <Link to="/login">
+          <Link to={PathName.Login}>
             <ListItemIcon>
               <LoginRounded />
             </ListItemIcon>
@@ -66,7 +67,7 @@ const ContainerStyle = {
     alignItems: 'center',
     cursor: 'pointer',
   },
-  'li div:first-child': {
+  'li div:first-of-type': {
     minWidth: '2rem',
   },
 
