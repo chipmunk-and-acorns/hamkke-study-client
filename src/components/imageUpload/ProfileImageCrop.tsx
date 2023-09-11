@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useRef, useState } from 'react';
+import { ChangeEvent, RefObject, useState } from 'react';
 import { Box, InputLabel, Typography } from '@mui/material';
 import Cropper, { ReactCropperElement } from 'react-cropper';
 
