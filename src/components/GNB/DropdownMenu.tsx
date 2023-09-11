@@ -1,13 +1,30 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemText } from '@mui/material';
 
 import theme from '../../styles/theme';
+import { postLogout } from '../../api/userApi';
+import { PathName } from '../../types/routerPath';
 
 interface IProps {
   handleModalMenuControl: () => void;
 }
 
 const DropdownMenu = ({ handleModalMenuControl }: IProps) => {
+  const navigate = useNavigate();
+  const accessToken = localStorage.getItem('accessToken');
+
+  const handleLogout = async () => {
+    if (accessToken) {
+      const res = await postLogout(accessToken);
+
+      if (res.status === 204) {
+        localStorage.removeItem('accessToken');
+        navigate(PathName.Home);
+        handleModalMenuControl();
+      }
+    }
+  };
+
   return (
     <>
       <Box sx={ModalBackDrop} onClick={handleModalMenuControl} />
@@ -25,7 +42,7 @@ const DropdownMenu = ({ handleModalMenuControl }: IProps) => {
             </Link>
           </ListItem>
           <ListItem>
-            <ListItemText>로그아웃</ListItemText>
+            <ListItemText onClick={handleLogout}>로그아웃</ListItemText>
           </ListItem>
         </List>
       </Box>
@@ -72,6 +89,7 @@ const ModalStyle = {
       span: {
         fontWeight: 'bold',
         color: theme.customPalette.grey[700],
+        cursor: 'pointer',
       },
     },
   },

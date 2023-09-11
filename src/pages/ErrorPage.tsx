@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { Box, Container, Typography } from '@mui/material';
 
 import { images } from '../utils/importImageUrl';
+import { PathName } from '../types/routerPath';
 
 const ErrorPage = () => {
   return (
     <Container maxWidth="sm" sx={{ transform: 'translate(10%, 40%)' }}>
-      <Link to="/">
+      <Link to={PathName.Home}>
         <img src={images.logo} alt="go to hamkke study home" title="홈으로 이동하기" />
       </Link>
       <Box sx={{ py: '3rem' }}>
