@@ -8,7 +8,7 @@ const Root = () => {
 
   return (
     <>
-      {pathname !== PathName?.Register && pathname !== PathName?.Login && <GNB />}
+      {pathname !== PathName.Register && pathname !== PathName.Login && <GNB />}
       <Outlet />
     </>
   );
