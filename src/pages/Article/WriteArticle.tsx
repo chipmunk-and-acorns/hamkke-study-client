@@ -9,6 +9,7 @@ import {
   technologyStack,
   workOptions,
 } from '../../assets/articleOptions';
+import SelectDatePicker from '../../components/DatePicker/SelectDatePicker';
 
 const WriteArticle = () => {
   return (
@@ -46,6 +47,9 @@ const WriteArticle = () => {
           <Selection options={technologyStack} placeholder="스택 선택" label="기술 스택" isMulti />
         </Grid>
         {/** 모집 마감일 (date picker) */}
+        <Grid item xs={6}>
+          <SelectDatePicker />
+        </Grid>
         <Grid item xs={6}>
           <Selection
             options={recruitmentPosition}
