@@ -4,6 +4,7 @@ import { Box, List, ListItem, ListItemText } from '@mui/material';
 import theme from '../../styles/theme';
 import { postLogout } from '../../api/userApi';
 import { PathName } from '../../types/routerPath';
+import { deleteAccessToken, deleteRefreshToken, getAccessToken } from '../../api/authApi';
 
 interface IProps {
   handleModalMenuControl: () => void;
@@ -11,14 +12,15 @@ interface IProps {
 
 const DropdownMenu = ({ handleModalMenuControl }: IProps) => {
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = getAccessToken();
 
   const handleLogout = async () => {
     if (accessToken) {
-      const res = await postLogout(accessToken);
+      const res = await postLogout();
 
       if (res.status === 204) {
-        localStorage.removeItem('accessToken');
+        deleteAccessToken();
+        deleteRefreshToken();
         navigate(PathName.Home);
         handleModalMenuControl();
       }
@@ -60,11 +62,13 @@ const ModalBackDrop = {
 
 const ModalStyle = {
   position: 'absolute',
+  zIndex: '30',
   right: '8rem',
   py: '1rem',
   px: '2rem',
   backgroundColor: theme.palette.grey[100],
   borderRadius: theme.shape.borderRadius,
+  boxShadow: `rgba(0, 0, 0, 0.24) 0px 3px 8px`,
 
   button: {
     position: 'absolute',

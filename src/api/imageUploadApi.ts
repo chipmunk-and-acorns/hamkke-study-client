@@ -2,7 +2,7 @@ import { axiosInstance } from './axios';
 import { VITE_SERVER_URL } from '../utils/importEnvVariable';
 import { typeGuard } from '../utils/typeGuard';
 
-export interface IPresignedImgUrl {
+interface IPresignedImgUrl {
   key: string;
   presigned: {
     url: string;

@@ -14,8 +14,12 @@ const RightMenu = () => {
   const renderMenu = () => {
     if (isLogin) {
       return (
-        <ListItem onClick={handleModalMenuControl}>
-          <Avatar src={images.profileImage1} alt="user profile image" />
+        <ListItem>
+          <Avatar
+            onClick={handleModalMenuControl}
+            src={images.profileImage1}
+            alt="user profile image"
+          />
         </ListItem>
       );
     } else {
