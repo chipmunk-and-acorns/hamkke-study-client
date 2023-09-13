@@ -1,8 +1,8 @@
-import { InputLabel } from '@mui/material';
 import { useState } from 'react';
+import { InputLabel } from '@mui/material';
 import Select, { GroupBase, OptionsOrGroups } from 'react-select';
-import theme from '../../styles/theme';
 
+import theme from '../../styles/theme';
 interface IProps {
   options: OptionsOrGroups<null, GroupBase<null>> | { value: string; label: string }[] | undefined;
   placeholder: string;

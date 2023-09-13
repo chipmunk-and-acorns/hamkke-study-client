@@ -5,12 +5,16 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { InputLabel } from '@mui/material';
 import theme from '../../styles/theme';
 
-const SelectDatePicker = () => {
+interface IProps {
+  label: string;
+}
+
+const SelectDatePicker = ({ label }: IProps) => {
   const [value, setValue] = useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <InputLabel children="모집 마감일" sx={LabelStyle} />
+      <InputLabel children={label} sx={LabelStyle} />
       <DatePicker sx={Style} value={value} onChange={(newValue) => setValue(newValue)} />
     </LocalizationProvider>
   );

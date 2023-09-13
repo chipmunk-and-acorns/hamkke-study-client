@@ -9,6 +9,9 @@ import { router } from './routes/router.tsx';
 const queryClient = new QueryClient();
 
 function App() {
+  // 새로고침, 창 껐다 켰을때 로그인 유지
+  // 최초 한번 회원정보 들고오는 API 호출
+
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
