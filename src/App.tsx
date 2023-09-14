@@ -1,25 +1,38 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RecoilRoot } from 'recoil';
+import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { CssBaseline } from '@mui/material';
 
 import { router } from './routes/router.tsx';
 
-const queryClient = new QueryClient();
+import { getPositions, getStacks } from './api/articleApi.ts';
+import { positionState, stackState } from './recoil/articleState.ts';
+import { IPosition, IStacks } from './types/article.ts';
 
 function App() {
-  // 새로고침, 창 껐다 켰을때 로그인 유지
-  // 최초 한번 회원정보 들고오는 API 호출
+  const setStacks = useSetRecoilState<IStacks | null>(stackState);
+  const setPositions = useSetRecoilState<IPosition | null>(positionState);
+  const stack = useRecoilValue(stackState);
+  const positoin = useRecoilValue(positionState);
+
+  useEffect(() => {
+    // stack, position 가져오는 요청
+    // TODO: my info api 호출
+    Promise.all([getStacks(), getPositions()])
+      .then((values) => {
+        const [stackData, positionData] = values;
+        setStacks(stackData.data);
+        setPositions(positionData.data);
+      })
+      .catch((error) => console.error('Error: ', error));
+  }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <RouterProvider router={router} />
-        <CssBaseline />
-      </RecoilRoot>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <>
+      <RouterProvider router={router} />
+      <CssBaseline />
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   username: string;
   password: string;
   passwordConfirm?: string;
@@ -6,7 +6,7 @@ export interface User {
   profileImage?: string;
 }
 
-export interface UserInfo {
+export interface IUserInfo {
   memberId: string;
   nickname: string;
   memberImage: string | null;

@@ -34,5 +34,8 @@ export const postLogout = async () => {
   return res;
 };
 
-// access token reissuance
-export const postAccessTokenReissue = () => {};
+// my info lookup
+export const getMyInfoLookup = async () => {
+  const res = await axiosInstance.get(`${VITE_SERVER_URL}/members/me`);
+  return res;
+};
