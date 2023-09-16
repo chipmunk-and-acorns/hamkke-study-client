@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 import { VITE_SERVER_URL } from '../utils/importEnvVariable';
-import { getAccessToken, getRefreshToken, setAccessToken } from './authApi';
+import { getAccessToken, getRefreshToken, setAccessToken } from './auth';
 import { typeGuard } from '../utils/typeGuard';
 
 export const axiosInstance = axios.create({
@@ -33,18 +33,25 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { config, response } = error;
-    console.log(config);
-    console.log(response);
+    const {
+      config,
+      response: { data, status },
+    } = error;
 
-    if (response.data.error.message === 'jwt expired') {
+    if (
+      status === 401 &&
+      typeGuard<{ name: string; message: string; expiredAt: string }>(data, 'name') &&
+      data.name === 'TokenExpiredError'
+    ) {
       const res = await axiosInstance.post(`${VITE_SERVER_URL}/members/token`, {
         refreshToken: getRefreshToken(),
       });
 
       if (typeGuard<{ accessToken: string }>(res.data, 'accessToken')) {
         setAccessToken(res.data.accessToken);
-        // 바로 직전에 토큰 만료전에 해야 될 api 요청을 다시한 번 해야 됨
+        /** origin request에 새로 발급받은 accessToken 답아 재 요청 */
+        config.headers.authorization = `Bearer ${res.data.accessToken}`;
+        return axiosInstance(config);
       }
     }
   }

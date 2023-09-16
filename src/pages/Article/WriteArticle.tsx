@@ -1,19 +1,22 @@
+import { useRecoilValue } from 'recoil';
 import { Box, Typography, Grid, Divider, Button } from '@mui/material';
 
+import { positionState, stackState } from '../../recoil/articleState';
 import SelectDatePicker from '../../components/DatePicker/SelectDatePicker';
 import Selection from '../../components/SelectBox/Selection';
+import Quill from '../../components/ReactQuill/Quill';
+import InputBox from '../../components/Input/InputBox';
 import {
   durationOfProgress,
   recruitmentCategoryOptions,
   recruitmentNumberOfPeopleOptions,
-  recruitmentPosition,
-  technologyStack,
   workOptions,
 } from '../../assets/articleOptions';
-import Quill from '../../components/ReactQuill/Quill';
-import InputBox from '../../components/Input/InputBox';
 
 const WriteArticle = () => {
+  const stacks = useRecoilValue(stackState);
+  const positions = useRecoilValue(positionState);
+
   return (
     <Box sx={ContainerStyle}>
       <Box>
@@ -51,19 +54,14 @@ const WriteArticle = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <Selection
-              options={technologyStack}
-              placeholder="스택 선택"
-              label="기술 스택"
-              isMulti
-            />
+            <Selection options={stacks} placeholder="스택 선택" label="기술 스택" isMulti />
           </Grid>
           <Grid item xs={6}>
             <SelectDatePicker label="모집 마감일" />
           </Grid>
           <Grid item xs={6}>
             <Selection
-              options={recruitmentPosition}
+              options={positions}
               placeholder="프론트엔드, 백엔드, 기획자 등 선택"
               label="모집 포지션"
               isMulti

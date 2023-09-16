@@ -1,11 +1,11 @@
 import { axiosInstance } from './axios';
 
 import { VITE_SERVER_URL } from '../utils/importEnvVariable';
-import { User } from '../types/user';
-import { setAccessToken, setRefreshToken } from './authApi';
+import { IUser } from '../types/user';
+import { setAccessToken, setRefreshToken } from './auth';
 
 // register api
-export const postRegister = async (data: User) => {
+export const postRegister = async (data: IUser) => {
   const res = await axiosInstance.post(`${VITE_SERVER_URL}/members/register`, data);
 
   if (res) {
@@ -17,7 +17,7 @@ export const postRegister = async (data: User) => {
 };
 
 // login api
-export const postLogin = async (data: User) => {
+export const postLogin = async (data: IUser) => {
   const res = await axiosInstance.post(`${VITE_SERVER_URL}/members/login`, data);
 
   if (res) {
@@ -37,5 +37,5 @@ export const postLogout = async () => {
 // my info lookup
 export const getMyInfoLookup = async () => {
   const res = await axiosInstance.get(`${VITE_SERVER_URL}/members/me`);
-  return res;
+  return res.data;
 };

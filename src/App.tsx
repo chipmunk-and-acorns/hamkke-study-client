@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import { CssBaseline } from '@mui/material';
 
@@ -9,21 +9,22 @@ import { router } from './routes/router.tsx';
 import { getPositions, getStacks } from './api/articleApi.ts';
 import { positionState, stackState } from './recoil/articleState.ts';
 import { IPosition, IStacks } from './types/article.ts';
+import { getMyInfoLookup } from './api/userApi.ts';
+import { userState } from './recoil/userState.ts';
+import { IUserInfo } from './types/user.ts';
 
 function App() {
   const setStacks = useSetRecoilState<IStacks | null>(stackState);
   const setPositions = useSetRecoilState<IPosition | null>(positionState);
-  const stack = useRecoilValue(stackState);
-  const positoin = useRecoilValue(positionState);
+  const setUserInfo = useSetRecoilState<IUserInfo | null>(userState);
 
   useEffect(() => {
-    // stack, position 가져오는 요청
-    // TODO: my info api 호출
-    Promise.all([getStacks(), getPositions()])
+    Promise.all([getStacks(), getPositions(), getMyInfoLookup()])
       .then((values) => {
-        const [stackData, positionData] = values;
-        setStacks(stackData.data);
-        setPositions(positionData.data);
+        const [stackData, positionData, myInfo] = values;
+        setStacks(stackData);
+        setPositions(positionData);
+        setUserInfo(myInfo);
       })
       .catch((error) => console.error('Error: ', error));
   }, []);

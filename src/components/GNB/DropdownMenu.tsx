@@ -4,7 +4,7 @@ import { Box, List, ListItem, ListItemText } from '@mui/material';
 import theme from '../../styles/theme';
 import { postLogout } from '../../api/userApi';
 import { PathName } from '../../types/routerPath';
-import { deleteAccessToken, deleteRefreshToken, getAccessToken } from '../../api/authApi';
+import { deleteAccessToken, deleteRefreshToken, getAccessToken } from '../../api/auth';
 
 interface IProps {
   handleModalMenuControl: () => void;

@@ -3,8 +3,13 @@ import { InputLabel } from '@mui/material';
 import Select, { GroupBase, OptionsOrGroups } from 'react-select';
 
 import theme from '../../styles/theme';
+import { IStacks } from '../../types/article';
 interface IProps {
-  options: OptionsOrGroups<null, GroupBase<null>> | { value: string; label: string }[] | undefined;
+  options:
+    | OptionsOrGroups<null, GroupBase<null>>
+    | { value: string; label: string }[]
+    | IStacks
+    | undefined;
   placeholder: string;
   label: string;
   isMulti?: boolean;
