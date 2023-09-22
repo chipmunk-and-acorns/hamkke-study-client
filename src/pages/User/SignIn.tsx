@@ -6,12 +6,12 @@ import { useSetRecoilState } from 'recoil';
 
 import { images } from '../../utils/importImageUrl';
 import { loginValidateSchema } from '../../utils/validation';
-import { User } from '../../types/user';
-import theme from '../../styles/theme';
+import { IUser } from '../../types/user';
+import { PathName } from '../../types/routerPath';
 import { postLogin } from '../../api/userApi';
 import { userState } from '../../recoil/userState';
+import theme from '../../styles/theme';
 import TextInput from '../../components/Input/TextInput';
-import { PathName } from '../../types/routerPath';
 
 const SignIn = () => {
   const setUserInfo = useSetRecoilState(userState);
@@ -24,7 +24,7 @@ const SignIn = () => {
   const mutation = useMutation(postLogin);
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: User) => {
+  const handleSubmit = async (values: IUser) => {
     try {
       const response = await mutation.mutateAsync(values);
       if (response) {

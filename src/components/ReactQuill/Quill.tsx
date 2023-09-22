@@ -25,14 +25,24 @@ const formats = [
   'link',
 ];
 
-const Quill = () => {
+interface IProps {
+  labelKey: string;
+  handleUpdateValue: (key: string, value: { value: string; label: string } | string) => void;
+}
+
+const Quill = ({ labelKey, handleUpdateValue }: IProps) => {
   const [value, SetValue] = useState('');
+
+  const handleUpdate = (e: any) => {
+    SetValue(e);
+    handleUpdateValue(labelKey, e);
+  };
 
   return (
     <ReactQuill
       theme="snow"
       value={value}
-      onChange={SetValue}
+      onChange={handleUpdate}
       formats={formats}
       modules={modules}
     />

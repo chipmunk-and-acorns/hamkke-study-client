@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { InputLabel } from '@mui/material';
 import Select, { GroupBase, OptionsOrGroups } from 'react-select';
 
-import theme from '../../styles/theme';
 import { IStacks } from '../../types/article';
+import theme from '../../styles/theme';
+
 interface IProps {
   options:
     | OptionsOrGroups<null, GroupBase<null>>
@@ -12,18 +13,32 @@ interface IProps {
     | undefined;
   placeholder: string;
   label: string;
+  labelKey: string;
   isMulti?: boolean;
+  handleUpdateValue: (key: string, value: { value: string; label: string } | string) => void;
 }
 
-const Selection = ({ options, placeholder, label, isMulti }: IProps) => {
+const Selection = ({
+  options,
+  placeholder,
+  label,
+  labelKey,
+  isMulti,
+  handleUpdateValue,
+}: IProps) => {
   const [selectedOption, setSelectOption] = useState(null);
+
+  const handleChange = (value: { value: string; label: string }) => {
+    setSelectOption(value);
+    handleUpdateValue(labelKey, value);
+  };
 
   return (
     <>
       <InputLabel children={label} sx={LabelStyle} />
       <Select
         defaultValue={selectedOption}
-        onChange={setSelectOption}
+        onChange={handleChange}
         isMulti={isMulti}
         options={options}
         placeholder={placeholder}

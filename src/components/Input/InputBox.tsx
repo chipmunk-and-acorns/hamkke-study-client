@@ -1,15 +1,26 @@
+import { ChangeEvent, useState } from 'react';
 import { Box, InputLabel, OutlinedInput } from '@mui/material';
+
 import theme from '../../styles/theme';
 
 interface IProps {
   label: string;
+  labelKey: string;
+  handleUpdateValue: (key: string, value: { value: string; label: string } | string) => void;
 }
 
-const InputBox = ({ label }: IProps) => {
+const InputBox = ({ label, labelKey, handleUpdateValue }: IProps) => {
+  const [value, setValue] = useState('');
+
+  const handleUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    handleUpdateValue(labelKey, e.target.value);
+  };
+
   return (
     <Box sx={BoxStyle}>
       <InputLabel>{label}</InputLabel>
-      <OutlinedInput placeholder="글 제목을 입력해주세요." />
+      <OutlinedInput placeholder="글 제목을 입력해주세요." value={value} onChange={handleUpdate} />
     </Box>
   );
 };

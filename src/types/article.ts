@@ -23,3 +23,15 @@ export interface IResponsePosition {
   value?: string;
   label?: string;
 }
+
+export interface IRequestArticle {
+  recruitmentType: string;
+  recruitmentLimit: number;
+  progressMode: string;
+  duration: number;
+  stacks: number[];
+  closingDate: string;
+  positionIds: number[];
+  title: string;
+  content: string;
+}

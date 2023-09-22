@@ -1,7 +1,7 @@
 import { axiosInstance } from './axios';
 
 import { VITE_SERVER_URL } from '../utils/importEnvVariable';
-import { IResponsePosition, IResponseStack } from './../types/article';
+import { IRequestArticle, IResponsePosition, IResponseStack } from './../types/article';
 
 /** getAll Articles */
 export const getArticles = async () => {
@@ -39,4 +39,11 @@ export const getPositions = async () => {
     return positionObj;
   });
   return positions;
+};
+
+/** post article */
+export const postArticle = async (data: IRequestArticle) => {
+  const res = await axiosInstance.post(`${VITE_SERVER_URL}/articles`, data);
+  if (res) {
+  }
 };

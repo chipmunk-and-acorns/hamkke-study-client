@@ -6,7 +6,7 @@ const recruitmentCategoryOptions = [
 
 // 모집 인원
 const recruitmentNumberOfPeopleOptions = [
-  { value: 'undetermined', label: '인원 미정' },
+  // { value: 'undetermined', label: '인원 미정' },
   { value: '1', label: '1명' },
   { value: '2', label: '2명' },
   { value: '3', label: '3명' },
@@ -16,7 +16,7 @@ const recruitmentNumberOfPeopleOptions = [
   { value: '7', label: '7명' },
   { value: '8', label: '8명' },
   { value: '9', label: '9명' },
-  { value: 'more', label: '10명 이상' },
+  // { value: 'more', label: '10명 이상' },
 ];
 
 // 진행 박식
@@ -27,14 +27,14 @@ const workOptions = [
 
 // 진행 기간
 const durationOfProgress = [
-  { value: 'undetermined', label: '기간 미정' },
+  // { value: 'undetermined', label: '기간 미정' },
   { value: '1', label: '1개월' },
   { value: '2', label: '2개월' },
   { value: '3', label: '3개월' },
   { value: '4', label: '4개월' },
   { value: '5', label: '5개월' },
   { value: '6', label: '6개월' },
-  { value: 'more', label: '장기' },
+  // { value: 'more', label: '장기' },
 ];
 
 // 기술 스택
