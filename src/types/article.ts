@@ -1,11 +1,15 @@
+import { IUserInfo } from './user';
+
 export interface IStacks {
   stackId: number;
-  createdAt: string;
+  createdAt?: string;
+  name?: string;
 }
 
 export interface IPosition {
   positionId: number;
-  createdAt: string;
+  createdAt?: string;
+  name?: string;
 }
 
 export interface IResponseStack {
@@ -34,4 +38,24 @@ export interface IRequestArticle {
   positionIds: number[];
   title: string;
   content: string;
+}
+
+export interface IResponseArticle extends IUserInfo, IStacks, IPosition {
+  member: IUserInfo;
+  articleId: string;
+  title: string;
+  content: string;
+  recruitmentType: string;
+  recruitmentLimit: number;
+  progressMode: string;
+  duration: number;
+  stacks: IStacks[];
+  closingDate: string;
+  positions: IPosition[];
+  createdAt: string;
+  modifiedAt: string;
+  isClosed: boolean;
+  isDeleted: boolean;
+  likeCount: number;
+  viewCount: number;
 }

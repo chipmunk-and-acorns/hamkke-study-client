@@ -7,18 +7,14 @@ import { router } from './routes/router.tsx';
 import { getPositions, getStacks } from './api/articleApi.ts';
 import { positionState, stackState } from './recoil/articleState.ts';
 import { IPosition, IStacks } from './types/article.ts';
-// import { userState } from './recoil/userState.ts';
-// import { IUserInfo } from './types/user.ts';
-
-/* enum PromiseResponseStatus {
-  FulFilled = 'filfilled',
-  Rejected = 'rejected',
-} */
+import { userState } from './recoil/userState.ts';
+import { IUserInfo } from './types/user.ts';
+import { getMyInfoLookup } from './api/userApi.ts';
 
 function App() {
   const setStacks = useSetRecoilState<IStacks | null>(stackState);
   const setPositions = useSetRecoilState<IPosition | null>(positionState);
-  // const setUserInfo = useSetRecoilState<IUserInfo | null>(userState);
+  const setUserInfo = useSetRecoilState<IUserInfo | null>(userState);
 
   useEffect(() => {
     Promise.all([getStacks(), getPositions()])
@@ -28,6 +24,16 @@ function App() {
         setPositions(positionData);
       })
       .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getMyInfoLookup()
+      .then((res) => {
+        setUserInfo(res);
+      })
+      .catch((err) => {
+        setUserInfo(null);
+      });
   }, []);
 
   return (

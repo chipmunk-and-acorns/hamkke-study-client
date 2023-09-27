@@ -3,4 +3,5 @@ export enum PathName {
   Register = '/register',
   Login = '/login',
   NewArticle = '/articles/new',
+  DetailArticle = '/articles/:id',
 }

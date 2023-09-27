@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Box, Typography, Grid, Divider, Button } from '@mui/material';
 
@@ -14,8 +14,8 @@ import Selection from '../../components/SelectBox/Selection';
 import Quill from '../../components/ReactQuill/Quill';
 import InputBox from '../../components/Input/InputBox';
 import ToastifyAlert from '../../components/alert/toastifyAlert';
-import { IRequestArticle } from '../../types/article';
 import { postArticle } from '../../api/articleApi';
+import { useNavigate } from 'react-router-dom';
 
 enum SelectValues {
   RecruitmentType = 'recruitmentType', // 모집 구분
@@ -30,6 +30,7 @@ enum SelectValues {
 }
 
 const WriteArticle = () => {
+  const navigate = useNavigate();
   const stacks = useRecoilValue(stackState);
   const positions = useRecoilValue(positionState);
   const [values, setValues] = useState([
@@ -79,7 +80,7 @@ const WriteArticle = () => {
   };
 
   /** 글 등록 함수 */
-  const handlePostArticle = () => {
+  const handlePostArticle = async () => {
     const messages: string[] = [];
 
     values.forEach((obj) => {
@@ -104,8 +105,11 @@ const WriteArticle = () => {
       });
 
       // data를 서버 요청시 body에 담아 보내기
-      // postArticle(data);
-      console.log(data);
+      const articleId = await postArticle(data);
+      if (articleId) {
+        navigate(`/articles/${articleId}`);
+      }
+      // 새로 만들어진 게시글 id를 받아와서 해당 게시글 상세페이지로 페이지 리다이렉트 시키기
     }
   };
 

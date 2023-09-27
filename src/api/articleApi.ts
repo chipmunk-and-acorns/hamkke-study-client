@@ -45,5 +45,19 @@ export const getPositions = async () => {
 export const postArticle = async (data: IRequestArticle) => {
   const res = await axiosInstance.post(`${VITE_SERVER_URL}/articles`, data);
   if (res) {
+    const { articleId } = res.data;
+    return articleId;
   }
 };
+
+/** get article */
+export const getArticle = async (articleId: string) => {
+  const res = await axiosInstance.get(`${VITE_SERVER_URL}/articles/${articleId}`);
+  if (res) {
+    const { data } = res;
+    return data;
+  }
+};
+
+/** patch recruitment completed */
+export const patchRecruitmentCompleted = async (articleId: string) => {};
