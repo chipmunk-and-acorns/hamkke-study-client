@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Box, List, ListItem, ListItemIcon, ListItemText, Avatar } from '@mui/material';
 import { CreateRounded, LoginRounded } from '@mui/icons-material';
 
+import { PathName } from '../../types/routerPath';
 import { images } from '../../utils/importImageUrl';
 import DropdownMenu from './DropdownMenu';
-import { PathName } from '../../types/routerPath';
 
 const RightMenu = () => {
   const isLogin = localStorage.getItem('accessToken');
@@ -14,8 +14,12 @@ const RightMenu = () => {
   const renderMenu = () => {
     if (isLogin) {
       return (
-        <ListItem onClick={handleModalMenuControl}>
-          <Avatar src={images.profileImage1} alt="user profile image" />
+        <ListItem>
+          <Avatar
+            onClick={handleModalMenuControl}
+            src={images.profileImage1}
+            alt="user profile image"
+          />
         </ListItem>
       );
     } else {
@@ -40,7 +44,7 @@ const RightMenu = () => {
     <Box sx={ContainerStyle}>
       <List>
         <ListItem>
-          <Link to="/write">
+          <Link to={PathName.NewArticle}>
             <ListItemIcon>
               <CreateRounded />
             </ListItemIcon>

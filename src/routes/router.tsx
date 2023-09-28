@@ -6,6 +6,8 @@ import Main from '../pages/Main';
 import SignUp from '../pages/User/SignUp';
 import ErrorPage from '../pages/ErrorPage';
 import SignIn from '../pages/User/SignIn';
+import WriteArticle from '../pages/Article/WriteArticle';
+import DetailArticle from '../pages/Article/DetailArticle';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ export const router = createBrowserRouter([
       {
         path: PathName.Login,
         element: <SignIn />,
+      },
+      {
+        path: PathName.NewArticle,
+        element: <WriteArticle />,
+      },
+      {
+        path: PathName.DetailArticle,
+        element: <DetailArticle />,
       },
     ],
   },

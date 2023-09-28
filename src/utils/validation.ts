@@ -22,7 +22,7 @@ export const validation = {
 };
 
 /**
- * signup validation schema
+ * signUp validation schema
  */
 export const registerValidateSchema = Yup.object({
   username: Yup.string()
@@ -45,6 +45,9 @@ export const registerValidateSchema = Yup.object({
     .required('닉네임을 입력해주세요.'),
 });
 
+/**
+ * signIn validation schema
+ */
 export const loginValidateSchema = Yup.object({
   username: Yup.string()
     .matches(validation.emailValidRule, '이메일 주소가 정확한지 확인해 주세요.')

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, Button } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
@@ -6,15 +6,17 @@ import { useSetRecoilState } from 'recoil';
 
 import { images } from '../../utils/importImageUrl';
 import { loginValidateSchema } from '../../utils/validation';
-import { User } from '../../types/user';
-import theme from '../../styles/theme';
+import { IUser } from '../../types/user';
+import { PathName } from '../../types/routerPath';
 import { postLogin } from '../../api/userApi';
 import { userState } from '../../recoil/userState';
+import theme from '../../styles/theme';
 import TextInput from '../../components/Input/TextInput';
-import { PathName } from '../../types/routerPath';
 
 const SignIn = () => {
   const setUserInfo = useSetRecoilState(userState);
+  const location = useLocation();
+  const { from } = location.state || { from: '/' };
 
   const initialValues = {
     username: '',
@@ -24,12 +26,12 @@ const SignIn = () => {
   const mutation = useMutation(postLogin);
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: User) => {
+  const handleSubmit = async (values: IUser) => {
     try {
       const response = await mutation.mutateAsync(values);
       if (response) {
         setUserInfo(response);
-        navigate(PathName.Home);
+        navigate(from);
       }
     } catch (error) {
       console.error(error);
