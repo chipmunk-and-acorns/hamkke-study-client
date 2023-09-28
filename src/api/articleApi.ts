@@ -60,4 +60,11 @@ export const getArticle = async (articleId: string) => {
 };
 
 /** patch recruitment completed */
-export const patchRecruitmentCompleted = async (articleId: string) => {};
+export const patchRecruitmentCompleted = async (articleId: string) => {
+  return await axiosInstance.patch(`${VITE_SERVER_URL}/articles/complete/${articleId}`);
+};
+
+/** delete article */
+export const deleteArticle = async (articleId: string) => {
+  return await axiosInstance.delete(`${VITE_SERVER_URL}/articles/${articleId}`);
+};
