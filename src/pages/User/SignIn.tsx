@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, Button } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
@@ -15,6 +15,8 @@ import TextInput from '../../components/Input/TextInput';
 
 const SignIn = () => {
   const setUserInfo = useSetRecoilState(userState);
+  const location = useLocation();
+  const { from } = location.state || { from: '/' };
 
   const initialValues = {
     username: '',
@@ -29,7 +31,7 @@ const SignIn = () => {
       const response = await mutation.mutateAsync(values);
       if (response) {
         setUserInfo(response);
-        navigate(PathName.Home);
+        navigate(from);
       }
     } catch (error) {
       console.error(error);

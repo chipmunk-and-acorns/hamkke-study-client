@@ -13,7 +13,7 @@ import SelectDatePicker from '../../components/DatePicker/SelectDatePicker';
 import Selection from '../../components/SelectBox/Selection';
 import Quill from '../../components/ReactQuill/Quill';
 import InputBox from '../../components/Input/InputBox';
-import ToastifyAlert from '../../components/alert/toastifyAlert';
+import ToastifyAlert from '../../components/Alert/toastifyAlert';
 import { postArticle } from '../../api/articleApi';
 import { useNavigate } from 'react-router-dom';
 
