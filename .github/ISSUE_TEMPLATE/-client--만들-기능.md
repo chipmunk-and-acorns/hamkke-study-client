@@ -1,5 +1,5 @@
 ---
-name: "[Client] 만들 기"
+name: "[Client] 만들 기능"
 about: issue
 title: "[Client] 만들 기능"
 labels: ''
