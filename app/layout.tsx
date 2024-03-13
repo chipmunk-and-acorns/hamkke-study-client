@@ -3,14 +3,14 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 import "./globals.css";
-import MainHeader from "@/components/header/page";
+import MainNavigation from "@/components/navigation/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Hamkke Study",
   description: "Recruit teammates for studies, projects, and more.",
-  // icons: { icon: "./favicon.ico" },
+  icons: { icon: "./icon.ico" },
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <MainHeader />
+          <MainNavigation />
           {children}
         </AppRouterCacheProvider>
       </body>
