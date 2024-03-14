@@ -1,29 +1,33 @@
-import { Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
 
-import HamkkeLogo from "@/public/assets/hamkke_logo.png";
+import { HamkkeLogo } from "@/public/assets/imgSrc";
 
 const Copyright = (props: any) => {
   return (
-    <Typography
-      variant="body2"
-      align="center"
-      color="text.secondary"
-      {...props}
-    >
+    <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
       <Image
         src={HamkkeLogo}
         alt="hamkke logo"
-        style={{ width: "4rem", height: "1rem" }}
+        style={{ width: "5.2rem", height: "1.2rem" }}
       />
-      {" Copyright © "}
-      <Link href="https://github.com/chipmunk-and-acorns">
-        Hamkke Github site
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+      <Typography variant="body2" sx={{ color: "grey", mx: 1 }}>
+        Copyright &copy;
+      </Typography>
+      <Link
+        href="https://github.com/chipmunk-and-acorns"
+        style={{ fontWeight: "bold" }}
+      >
+        <Typography variant="body2" sx={{ mr: 1 }}>
+          Hamkke Github site
+        </Typography>
+      </Link>
+      <Typography variant="body2" sx={{ color: "grey" }}>
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </Box>
   );
 };
 

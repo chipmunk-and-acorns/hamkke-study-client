@@ -1,8 +1,8 @@
-import Image from "next/image";
-
-import errorPage404Img from "@/public/assets/errorpage_404.png";
-import { Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
+import { Button, Container, Typography } from "@mui/material";
+
+import { Error404 } from "@/public/assets/imgSrc";
 
 const NotFound = () => {
   return (
@@ -16,7 +16,7 @@ const NotFound = () => {
       }}
     >
       <Image
-        src={errorPage404Img}
+        src={Error404}
         alt={`A bear crying because he can't find the page img`}
       />
       <Typography m={4} sx={{ fontWeight: "bold" }}>

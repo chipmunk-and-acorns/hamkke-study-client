@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 import styles from "./navigation.module.css";
-import hamkkeLogo from "@/public/assets/hamkke_logo.png";
+import { HamkkeLogo } from "@/public/assets/imgSrc";
 
 const MainNavigation = () => {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ const MainNavigation = () => {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <Image src={hamkkeLogo} alt="Going home to hamkke" />
+        <Image src={HamkkeLogo} alt="Going home to hamkke" />
       </Link>
       <nav className={styles.nav}>
         <ul>
