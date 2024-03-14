@@ -30,6 +30,10 @@
   text-shadow: 0 0 18px rgba(248, 190, 42, 0.8);
 }
 
+.active {
+  border-bottom: 3px solid #f9b331;
+}
+
 @media (min-width: 768px) {
   .header {
     padding: 2rem 5%;
