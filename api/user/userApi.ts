@@ -2,19 +2,20 @@ import { IUser } from "@/constants/user";
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const AUTH_LOGIN = `${SERVER_URL}/auth/login/email`;
+const AUTH_REGISTER = `${SERVER_URL}/auth/register/email`;
+
+const headers = {
+  "Content-Type": "application/json;charset=utf-8",
+};
 
 /**
  * login
  */
-export const postLogin = async (data: IUser) => {
-  console.log(data);
-
+const postLogin = async (data: IUser) => {
   const result = await fetch(`${AUTH_LOGIN}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(values),
+    headers,
+    body: JSON.stringify(data),
   }).then((res) => res.json());
 
   return result;
@@ -23,8 +24,14 @@ export const postLogin = async (data: IUser) => {
 /**
  * register
  */
-const postRegister = () => {
-  return;
+const postRegister = async (data: IUser) => {
+  const result = await fetch(`${AUTH_REGISTER}`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  }).then((res) => res.json());
+
+  return result;
 };
 
 /**
@@ -34,3 +41,5 @@ const postRegister = () => {
 /**
  * refreshToken
  */
+
+export { postLogin, postRegister };

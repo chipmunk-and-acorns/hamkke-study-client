@@ -2,7 +2,7 @@
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { LockRounded } from "@mui/icons-material";
+import LockRounded from "@mui/icons-material/LockRounded";
 import {
   Container,
   Typography,
@@ -15,6 +15,7 @@ import {
 import Copyright from "@/components/copyright/copyright";
 import Link from "next/link";
 import { postLogin } from "@/api/user/userApi";
+import { IUser } from "@/constants/user";
 
 /**
  * TODO: 로그인 유효성 검증
@@ -25,7 +26,9 @@ import { postLogin } from "@/api/user/userApi";
  */
 // 로그인의 경우 회원가입 시 이미 유효성 검증을 통과 후 가입 -> 이메일 타입체크, 비밀번호 입력만 되면 로그인 요청 처리하기
 const validationSchema = Yup.object({
-  email: Yup.string().email().required("이메일을 입력해주세요."),
+  email: Yup.string()
+    .email("유효하지 않은 이메일 주소입니다.")
+    .required("이메일을 입력해주세요."),
   password: Yup.string().required("비밀번호를 입력해주세요."),
 });
 
@@ -43,11 +46,15 @@ const LoginPage = () => {
        * 로그인 성공 시: 로그인 후 이동할 페이지 이동 처리
        * 로그인 실패 시: 화면에 피드백
        */
-      alert(JSON.stringify(values, null, 2));
-
+      handleLogin(values);
       // TODO: 서버에 로그인 요청 / 결과 처리
     },
   });
+
+  const handleLogin = async (data: IUser) => {
+    const result = await postLogin(data);
+    console.log(result);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,8 +66,8 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" component="h1">
-          Login
+        <Typography variant="h5" component="h1" fontWeight={"bold"}>
+          로그인
         </Typography>
         <Avatar sx={{ m: 4, bgcolor: "primary.dark" }}>
           <LockRounded />
@@ -93,12 +100,21 @@ const LoginPage = () => {
               onBlur={formik.handleBlur}
             />
             {formik.errors.email && formik.touched.email && (
-              <div>{formik.errors.email}</div>
+              <Typography variant="body2" sx={{ color: "warning.dark" }}>
+                {formik.errors.email}
+              </Typography>
             )}
             {formik.errors.password && formik.touched.password && (
-              <div>{formik.errors.password}</div>
+              <Typography variant="body2" sx={{ color: "warning.dark" }}>
+                {formik.errors.password}
+              </Typography>
             )}
-            <Button type="submit" variant="contained" fullWidth sx={{ my: 6 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{ my: 6, fontWeight: "bold" }}
+            >
               Login
             </Button>
           </Box>
