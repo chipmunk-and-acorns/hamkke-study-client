@@ -1,4 +1,4 @@
-import { IUser } from "@/constants/user";
+import { IUser } from "@/types/user";
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const AUTH_LOGIN = `${SERVER_URL}/auth/login/email`;
