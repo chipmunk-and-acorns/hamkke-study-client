@@ -10,6 +10,7 @@ import { Input } from "@mui/joy";
 
 import { position, postTypes, recruitCount, stacks } from "@/constants/data";
 import SelectBox from "@/components/select/selectBox";
+import QuillEditor from "@/components/quill/reactQuill";
 
 /**
  * 글 작성시 사용할 값들
@@ -26,7 +27,7 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const PostWritePage = () => {
   return (
-    <Container maxWidth="lg" sx={{ height: "100vh" }}>
+    <Container maxWidth="lg" sx={{ height: "100%", mb: 10 }}>
       <Typography variant="h5" fontWeight="bold" textAlign={"center"} my={8}>
         프로젝트/스터디 모집 글 작성
       </Typography>
@@ -60,7 +61,15 @@ const PostWritePage = () => {
             />
           </Grid>
           <Grid xs={4} sm={4} md={4}>
-            <Typography variant="subtitle2" fontWeight={"bold"}>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontSize: "1rem",
+                lineHeight: "1.75",
+                letterSpacing: "0.00938em",
+                fontWeight: 700,
+              }}
+            >
               모집 마감일
             </Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -98,34 +107,23 @@ const PostWritePage = () => {
           sx={{ border: "0.12rem solid #E0CCBE", mt: "0.5rem", mb: "2rem" }}
         />
         {/* 
-        - title
-        - content
-        
         글 작성 시 때 팀원들을 어떻게 받을 지 물어보는 체크 박스
-
         1. 즉시참여 받기 checkbox 선택
         2. 참여신청 받기 checkbox 클릭 시 
             1) 전달 메세지 (default)  
             2) 사전 질문 추가 입력 버튼 클릭시 입력 창 제공
-
-
-        ---
-
-        상세 페이지
-
-        글을 읽는 사람은 
          */}
-        <Box maxWidth="sm" mb={4}>
+        <Box maxWidth="lg" mb={4}>
           <Typography variant="subtitle1" fontWeight={"bold"}>
             제목
           </Typography>
           <Input color="neutral" size="md" variant="soft" />
         </Box>
-        <Box mb={4}>
+        <Box maxWidth="lg" mb={10}>
           <Typography variant="subtitle1" fontWeight={"bold"}>
             내용
           </Typography>
-          <textarea />
+          <QuillEditor value="test" onChange={() => console.log()} />
         </Box>
         <Box>
           <Typography variant="subtitle2" fontWeight={"bold"}>
