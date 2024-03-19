@@ -1,4 +1,3 @@
-import BasicAlert from "@/components/alert/alert";
 import { Container, Typography } from "@mui/material";
 
 export const metadata = {

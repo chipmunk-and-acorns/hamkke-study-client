@@ -1,4 +1,4 @@
-import PostModifyPage from "@/page/postModify";
+import PostModifyPage from "@/page/post/postModify";
 
 const PostModifyContainer = () => {
   return <PostModifyPage />;

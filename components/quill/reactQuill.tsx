@@ -3,6 +3,7 @@
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
+import LoadingSpinners from "../loading/loading";
 
 /* const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -31,7 +32,7 @@ const QuillEditor = ({ value, onChange }: IProps) => {
     () =>
       dynamic(() => import("react-quill"), {
         ssr: false,
-        loading: () => <div>form loading...</div>,
+        loading: () => <LoadingSpinners />,
       }),
     []
   );
