@@ -11,6 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { Input } from "@mui/joy";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Box,
   Container,
@@ -25,11 +26,19 @@ import {
 import { position, postTypes, recruitCount, stacks } from "@/constants/data";
 import SelectBox from "@/components/select/selectBox";
 import QuillEditor from "@/components/quill/reactQuill";
+import BasicAlert from "@/components/alert/alert";
 interface IPreQuestion {
   value: string;
   id: string;
 }
 
+/**
+ * TODO
+ * - state들 유효성 검증
+ * - 모든 값이 유효성 검증 통과해야 서버로 post 요청 보내기
+ * - 글 작성이 완료된 후 페이지 이동 어디로 할지? (메인, 해당 글 상세페이지로 갈지?)
+ *
+ */
 const PostWritePage = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [preWriteQuestion, setPreWriteQuestion] = useState("");
@@ -38,8 +47,16 @@ const PostWritePage = () => {
   // 참여 신청 여부 선택값 변경 함수
   // TODO: 'apply'에서 'immediately'로 바꾸기전에 alert 띄우기(작성한 사전 질문을 다 지우게됩니다. 계속하시겠습니까?)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (selectedValue === "apply") setPreQuestionList([]);
-    setSelectedValue((event.target as HTMLInputElement).value);
+    let confirmMessage = `'즉시 참여 가능'으로 변경하실 경우 작성하신 사전질문 리스트가 지워집니다. 변경할까요?`;
+
+    if (selectedValue === "apply") {
+      if (confirm(confirmMessage)) {
+        setPreQuestionList([]);
+        setSelectedValue((event.target as HTMLInputElement).value);
+      }
+    } else {
+      setSelectedValue((event.target as HTMLInputElement).value);
+    }
   };
 
   // 사전 질문 input 값 변경 함수
@@ -279,8 +296,8 @@ const PostWritePage = () => {
                       variant="subtitle1"
                       sx={{
                         display: "inline-block",
-                        pl: "0.5rem",
-                        minWidth: "500px",
+                        px: "0.5rem",
+                        width: "80vw",
                         my: "0.3rem",
                         color: "#727070",
                         fontWeight: "bold",
