@@ -27,8 +27,8 @@ const MainNavigation = () => {
         <>
           <li>
             <Link
-              href="/post-write"
-              className={styles[`${pathname === "/post-write" && "active"}`]}
+              href="/post/write"
+              className={styles[`${pathname === "/post/write" && "active"}`]}
             >
               새 글 쓰기
             </Link>

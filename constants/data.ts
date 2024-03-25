@@ -23,6 +23,7 @@ const recruitCount: Options[] = [
 ];
 
 const stacks: Options[] = [
+  { value: "all", label: "전체" },
   { value: "javaScript", label: "JavaScript" },
   { value: "typeScript", label: "TypeScript" },
   { value: "react", label: "React" },
