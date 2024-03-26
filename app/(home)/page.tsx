@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export const metadata = {
   title: "Home",
@@ -6,8 +6,8 @@ export const metadata = {
 
 export default async function Home() {
   return (
-    <main>
+    <Container maxWidth="lg">
       <Typography variant="h4">Hamkke Study</Typography>
-    </main>
+    </Container>
   );
 }

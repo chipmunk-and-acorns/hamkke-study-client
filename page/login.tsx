@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import LockRounded from "@mui/icons-material/LockRounded";
@@ -13,9 +14,8 @@ import {
 } from "@mui/material";
 
 import Copyright from "@/components/copyright/copyright";
-import Link from "next/link";
 import { postLogin } from "@/api/user/userApi";
-import { IUser } from "@/constants/user";
+import { IUser } from "@/types/user";
 
 /**
  * TODO: 로그인 유효성 검증
@@ -84,7 +84,6 @@ const LoginPage = () => {
               margin="normal"
               {...formik.getFieldProps("email")}
             />
-
             <TextField
               required
               variant="standard"

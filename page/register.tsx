@@ -15,7 +15,7 @@ import {
 
 import Copyright from "@/components/copyright/copyright";
 import { postRegister } from "@/api/user/userApi";
-import { IUser } from "@/constants/user";
+import { IUser } from "@/types/user";
 
 const validationSchema = Yup.object({
   email: Yup.string()
