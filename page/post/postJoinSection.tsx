@@ -19,12 +19,25 @@ import {
 interface IPreQuestion {
   value: string;
   id: string;
+  handlePreQuestionChange: () => void;
 }
 
-const PostJoinSection = () => {
+const PostJoinSection = ({
+  value,
+  id,
+  handlePreQuestionChange,
+}: IPreQuestion) => {
   const [selectedValue, setSelectedValue] = useState("");
   const [preWriteQuestion, setPreWriteQuestion] = useState("");
   const [preQuestionList, setPreQuestionList] = useState<IPreQuestion[]>([]);
+
+  // write component 값 변경 함수(부모 컴포넌트) > update 느림, 해결하기
+  const handleWriteChange = () => {
+    handlePreQuestionChange({
+      select: selectedValue,
+      writeQuestionList: preQuestionList,
+    });
+  };
 
   // 참여 신청 여부 선택값 변경 함수
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,9 +47,11 @@ const PostJoinSection = () => {
       if (confirm(confirmMessage)) {
         setPreQuestionList([]);
         setSelectedValue((event.target as HTMLInputElement).value);
+        handleWriteChange();
       }
     } else {
       setSelectedValue((event.target as HTMLInputElement).value);
+      handleWriteChange();
     }
   };
 
@@ -55,6 +70,7 @@ const PostJoinSection = () => {
       let newList = { id: Date.now().toString(), value: preWriteQuestion };
       setPreQuestionList([...preQuestionList, newList]);
       setPreWriteQuestion("");
+      handleWriteChange();
     }
   };
 
@@ -64,6 +80,7 @@ const PostJoinSection = () => {
       (question) => question.id !== selectId
     );
     setPreQuestionList(newPrevQuestionList);
+    handleWriteChange();
   };
 
   return (

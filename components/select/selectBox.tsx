@@ -4,14 +4,16 @@ import { Typography } from "@mui/material";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
-import { Options } from "@/constants/data";
+import { IOptions } from "@/types/post";
 import useId from "@mui/material/utils/useId";
 
 interface IProps {
   placeholder?: string;
   label: string;
-  options: Options[];
+  options: IOptions[];
   isMulti?: boolean;
+  name: string;
+  onChange: (value: { key: string; value: string }) => void;
 }
 
 const animatedComponent = makeAnimated();
@@ -21,6 +23,8 @@ const SelectBox = ({
   label,
   options,
   isMulti = false,
+  name,
+  onChange,
 }: IProps) => {
   return (
     <>
@@ -32,8 +36,9 @@ const SelectBox = ({
         isMulti={isMulti}
         components={animatedComponent}
         instanceId={useId()}
-        name="post-types"
         options={options}
+        name={name}
+        onChange={onChange}
       />
     </>
   );

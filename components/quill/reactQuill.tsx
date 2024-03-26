@@ -1,8 +1,9 @@
 "use client";
 
-import "react-quill/dist/quill.snow.css";
+import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
+import "react-quill/dist/quill.snow.css";
+
 import LoadingSpinners from "../loading/loading";
 
 /* const ReactQuill = dynamic(() => import("react-quill"), {
@@ -24,10 +25,10 @@ const modules = {
 
 interface IProps {
   value: string;
-  onChange: () => void;
+  handleContentChange: (value: string) => void;
 }
 
-const QuillEditor = ({ value, onChange }: IProps) => {
+const QuillEditor = ({ value, handleContentChange }: IProps) => {
   const ReactQuill = useMemo(
     () =>
       dynamic(() => import("react-quill"), {
@@ -37,15 +38,22 @@ const QuillEditor = ({ value, onChange }: IProps) => {
     []
   );
 
+  const [content, setContent] = useState(value);
+
+  const handleChange = (value: string) => {
+    setContent(value);
+    handleContentChange(value);
+  };
+
   return (
     <ReactQuill
       modules={modules}
-      value={value}
-      onChange={onChange}
+      value={content}
       style={{
         width: "100%",
         height: "400px",
       }}
+      onChange={handleChange}
     />
   );
 };

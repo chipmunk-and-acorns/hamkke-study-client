@@ -1,9 +1,19 @@
+"use client";
+
 import { Box, Divider, Typography } from "@mui/material";
 import { Input } from "@mui/joy";
 
 import QuillEditor from "@/components/quill/reactQuill";
 
-const PostContentSection = () => {
+interface IProps {
+  handleTitleChange: (value: string) => void;
+  handleContentChange: (name: string) => void;
+}
+
+const PostContentSection = ({
+  handleTitleChange,
+  handleContentChange,
+}: IProps) => {
   return (
     <Box component="section">
       <Typography variant="h5" fontWeight="bold">
@@ -19,13 +29,21 @@ const PostContentSection = () => {
         <Typography variant="subtitle1" fontWeight={"bold"}>
           제목
         </Typography>
-        <Input color="neutral" size="lg" variant="soft" />
+        <Input
+          color="neutral"
+          size="lg"
+          variant="soft"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleTitleChange(e.target.value)
+          }
+          name="title"
+        />
       </Box>
       <Box maxWidth="lg" mb={10}>
         <Typography variant="subtitle1" fontWeight={"bold"}>
           내용
         </Typography>
-        <QuillEditor value="test" onChange={() => console.log()} />
+        <QuillEditor handleContentChange={handleContentChange} />
       </Box>
     </Box>
   );
