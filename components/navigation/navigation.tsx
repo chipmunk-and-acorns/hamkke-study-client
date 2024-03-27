@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 
-import styles from "./navigation.module.css";
 import { HamkkeLogo } from "@/public/assets/imgSrc";
+import styles from "./navigation.module.css";
 
 /**
  * 로그인
@@ -19,7 +19,7 @@ import { HamkkeLogo } from "@/public/assets/imgSrc";
  */
 const MainNavigation = () => {
   const pathname = usePathname();
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const renderNavigation = (isLogin: boolean) => {
     if (isLogin) {

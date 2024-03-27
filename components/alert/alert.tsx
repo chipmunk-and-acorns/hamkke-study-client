@@ -45,6 +45,8 @@ const BasicAlert = ({
         gap: 2,
         width: `${width ? width : "100%"}`,
         flexDirection: "column",
+        alignItems: "flex-end",
+        paddingX: 4,
       }}
     >
       <Alert

@@ -12,13 +12,28 @@ const headers = {
  * login
  */
 const postLogin = async (data: IUser) => {
-  const result = await fetch(`${AUTH_LOGIN}`, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+  const userDataStr = `${data.email}:${data.password}`;
+  const base64EncodedStr = Buffer.from(userDataStr).toString("base64");
 
-  return result;
+  try {
+    const response = await fetch(`${AUTH_LOGIN}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Basic ${base64EncodedStr}`,
+      },
+    });
+
+    // HTTP 상태코드가 200~299 범위에 있지 않은 경우
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData;
+    }
+
+    return response.json();
+  } catch (err) {
+    throw err;
+  }
 };
 
 /**

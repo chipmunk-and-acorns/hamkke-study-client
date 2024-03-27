@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import Copyright from "@/components/copyright/copyright";
-import { postRegister } from "@/api/user/userApi";
+import { postRegister } from "@/api/auth/authApi";
 import { IUser } from "@/types/user";
 
 const validationSchema = Yup.object({
@@ -91,6 +91,7 @@ const RegisterPage = () => {
               margin="normal"
               {...formik.getFieldProps("password")}
             />
+            {/* password confirm input 만들어야 됨 */}
             <TextField
               required
               variant="standard"
